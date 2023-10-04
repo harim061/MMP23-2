@@ -203,4 +203,3 @@ ch9/yolov3.weights
 ch9/mask_rcnn_coco.h5
 ch8/cnn_for_stanford_dogs.h5
 ch9/xception_pascalvoc.pb
-ch7/dmlp_trained.h5
