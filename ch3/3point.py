@@ -62,6 +62,7 @@ img_rev = cv.subtract(255,gray)     # y = 255 - x
 # cv.imshow('reverse image',img_rev)
 
 #9
+# 이진화에 사옹
 # cv.threshold(src,thresh, max_val, type)
 # t = 50,  ret(frame을 잘 불러왔는가 T or F)
 ret, img_binary50 = cv.threshold(gray_small, 50, 255, cv.THRESH_BINARY)
