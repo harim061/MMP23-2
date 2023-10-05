@@ -18,7 +18,7 @@ femboss=np.array([[-1.0, 0.0, 0.0],
 
 gray16=np.int16(gray) #  gray = 1byte = 8bits -> 값을 잃어버리게 되어서 16bit로 늘려둠
 
-# clip연산
+# clip 연산
 emboss=np.uint8(np.clip(cv.filter2D(gray16,-1,femboss)+128,0,255))
 emboss_bad=np.uint8(cv.filter2D(gray16,-1,femboss)+128)
 
