@@ -3,6 +3,9 @@ import cv2 as cv
 img=cv.imread('check.png')
 gray=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
 
+# 잡음 없애기
+gray = cv.blur(gray,(3,3))
+
 # 1차미분 소벨 연산자 적용 : 중심 * 2
 # x = 1,0 (x방향의 차이)
 # y = 0,1 (y방향이 차이)

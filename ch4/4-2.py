@@ -1,6 +1,6 @@
 import cv2 as cv
 
-img=cv.imread('soccer.jpg')	# 영상 읽기
+img=cv.imread('check.png')	# 영상 읽기
 
 gray=cv.cvtColor(img,cv.COLOR_BGR2GRAY)
 
