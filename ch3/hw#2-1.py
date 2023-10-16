@@ -4,8 +4,7 @@ import cv2 as cv
 # 'face2.jpg' 이미지를 불러온다.
 img = cv.imread('face2.jpg')
 
-# 컬러 모델 선택을 위한 초기 변수를 설정한다.
-color_mode = ''
+
 
 # 이미지가 제대로 로드되었는지 확인한다.
 if img is None:
@@ -32,7 +31,7 @@ while True:
         mask = cv.inRange(img_color, (0, 133, 77), (255, 173, 127))
         # 4 피부색 출력
         skin_detection = cv.bitwise_and(img, img, mask=mask)
-        cv.imshow('Skin Detection in YCbCr', skin_detection)
+        cv.imshow('COLOR_BGR2YCrCb', skin_detection)
         cv.waitKey(0)
 
     # 사용자가 'h' 키를 누르면 HSV 컬러 모델을 사용하여 피부색을 검출한다.
@@ -44,7 +43,7 @@ while True:
         mask = cv.inRange(img_color, (0, 70, 50), (50, 150, 255))
         # 4 피부색 출력
         skin_detection = cv.bitwise_and(img, img, mask=mask)
-        cv.imshow('Skin Detection in HSV', skin_detection)
+        cv.imshow('COLOR_BGR2HSV', skin_detection)
         cv.waitKey(0)
 
 # 모든 창을 닫는다.
