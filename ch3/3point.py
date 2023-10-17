@@ -48,13 +48,13 @@ img512=cv.resize(img,dsize=(512,512))
 opencv_img=cv.imread('opencv_logo512.png')
 img_plus3 = cv.add(img512, opencv_img)
 # 255를 훌쩍 넘어서 밝은 부분 많음
-# cv.imshow('two images - add',img_plus3)
+cv.imshow('two images - add',img_plus3)
 
 
 #7
 # 255 비율 안에서 나오도록 0.5를 곱해줌
 img_plus4 = cv.addWeighted(img512, 0.5, opencv_img, 0.5, 0) # img512 * 0.5 + opencv_img + 0.5 + 0 비율의 합은 무조건 1
-# cv.imshow('two images - addWeighted',img_plus4)
+cv.imshow('two images - addWeighted',img_plus4)
 
 #8
 # input img : gray output img : img_rev
@@ -80,6 +80,8 @@ ret, img_binaryT = cv.threshold(gray_small, 100, 255, cv.THRESH_TRUNC)
 ret, img_binaryT0 = cv.threshold(gray_small, 100, 255, cv.THRESH_TOZERO)
 ret, img_binaryT0INV = cv.threshold(gray_small, 100, 255, cv.THRESH_TOZERO_INV)
 img_binary2=np.hstack((img_binaryB, img_binaryBINV, img_binaryT, img_binaryT0, img_binaryT0INV))
+
+
 cv.imshow('threshold',img_binary2)
 
 cv.waitKey()

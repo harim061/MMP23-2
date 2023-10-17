@@ -8,7 +8,9 @@ canny1=cv.Canny(gray,50,150)	# Tlow=50, Thigh=150으로 설정
 canny2=cv.Canny(gray,100,200)	# Tlow=100, Thigh=200으로 설정
 
 cv.imshow('Original',gray)
+#많은 에지 검출하겠다
 cv.imshow('Canny1',canny1)
+#사람 테두리만 필요하다
 cv.imshow('Canny2',canny2)
 
 cv.waitKey()
