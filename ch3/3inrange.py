@@ -10,7 +10,7 @@ img = cv.imread('soccer.jpg')
 cv.imshow('original',img)
 
 hsv_img = cv.cvtColor(img,cv.COLOR_BGR2HSV)
-red_mask = cv.inRange(hsv_img,(-10,50,50),(10,255,255)) # red의 범위
+red_mask = cv.inRange(hsv_img,(-10,50,50),(10,255,255)) # 9red의 범위
 
 # 원래 값 저장 and 연산자
 # A and B : if B=0(black) -> black 출력 , else B=1 A=0 -> 0/ A=1 -> 1

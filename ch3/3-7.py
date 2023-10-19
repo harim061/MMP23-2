@@ -25,9 +25,9 @@ emboss_bad=np.uint8(cv.filter2D(gray16,-1,femboss)+128)
 # cv.filter(영상,-1,필터이름)
 emboss_worse=cv.filter2D(gray,-1,femboss)
 
-# cv.imshow('Emboss',emboss)
-# cv.imshow('Emboss_bad',emboss_bad)
-# cv.imshow('Emboss_worse',emboss_worse)
+cv.imshow('Emboss',emboss)
+cv.imshow('Emboss_bad',emboss_bad)
+cv.imshow('Emboss_worse',emboss_worse)
 
 faverage = np.array([[1.0/9.0, 1.0/9.0,1.0/9.0],
                      [1.0/9.0,1.0/9.0,1.0/9.0],

@@ -14,3 +14,4 @@ plt.imshow(equal,cmap='gray'), plt.xticks([]), plt.yticks([]), plt.show()
 
 h=cv.calcHist([equal],[0],None,[256],[0,256])	# 히스토그램을 구해 출력
 plt.plot(h,color='r',linewidth=1), plt.show()
+
