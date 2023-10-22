@@ -23,6 +23,8 @@ dx=cv.filter2D(img,cv.CV_32F,ux)
 dyy=dy*dy
 dxx=dx*dx
 dyx=dy*dx
+
+# 가우시안 필터 적용
 gdyy=cv.filter2D(dyy,cv.CV_32F,g)
 gdxx=cv.filter2D(dxx,cv.CV_32F,g)
 gdyx=cv.filter2D(dyx,cv.CV_32F,g)

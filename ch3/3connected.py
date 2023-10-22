@@ -15,6 +15,7 @@ _, gray_bin = cv.threshold(median, 0, 255, cv.THRESH_OTSU + cv.THRESH_BINARY_INV
 # labels 어떤 애들이랑 연결되어있는가?
 # labels는 입력사진이랑 동일하게 만든다.
 # 배경은 0/ connectedComponents 동전에게 같은 번호로 라벨링
+# stats에  xy 값 저장
 cnt, labels, stats, centroids = cv.connectedComponentsWithStats(gray_bin)
 
 # 색 있는 사각형으로 나타내주기 위해서
@@ -33,6 +34,7 @@ for i in range(1, cnt): # 각각의 객체 정보에 들어가기 위해 반복�
     if area < 20:
         continue
 
+    # 각각의 영역마다 번호를 줌
     cv.rectangle(dst, (x, y, w, h), (255, 0, 255), 2)
     # cv.rectangle(dst,(x,y),(x+w,y+h),(255,0,255),2)
 
