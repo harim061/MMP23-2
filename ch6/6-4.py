@@ -27,27 +27,33 @@ class TrafficWeak(QMainWindow):
         recognitionButton.clicked.connect(self.recognitionFunction)        
         quitButton.clicked.connect(self.quitFunction)
 
-        self.signFiles=[['child.png','어린이'],['elder.png','노인'],['disabled.png','장애인']]	# 표지판 모델 영상
+        self.signFiles=[['stop.jpg','뽀로로'],['kyodong.jpg','교동'],['disabled.png','장애인']]	# 표지판 모델 영상
         self.signImgs=[]				# 표지판 모델 영상 저장
         
     def signFunction(self):
         self.label.clear()
         self.label.setText('교통약자 번호판을 등록합니다.')
-        
+
+        # 3개의 파일을 읽기
         for fname,_ in self.signFiles:
             self.signImgs.append(cv.imread(fname))
             cv.imshow(fname,self.signImgs[-1])        
 
+
     def roadFunction(self):
         if self.signImgs==[]: 
             self.label.setText('먼저 번호판을 등록하세요.')
+
+        # sign 이미지 다 읽었다!
         else:
             fname=QFileDialog.getOpenFileName(self,'파일 읽기','./')
+            # roadImg에 찾으려는 이미지 저장
             self.roadImg=cv.imread(fname[0])
             if self.roadImg is None: sys.exit('파일을 찾을 수 없습니다.')  
     
             cv.imshow('Road scene',self.roadImg)  
-        
+
+
     def recognitionFunction(self):
         if self.roadImg is None: 
             self.label.setText('먼저 도로 영상을 입력하세요.')
@@ -68,13 +74,15 @@ class TrafficWeak(QMainWindow):
                 knn_match=matcher.knnMatch(sign_des,road_des,2)
                 T=0.7
                 good_match=[]
+                # good_match 가까운 애를 찾아준다
                 for nearest1,nearest2 in knn_match:
                     if (nearest1.distance/nearest2.distance)<T:
                         good_match.append(nearest1)
                 GM.append(good_match)        
             
             best=GM.index(max(GM,key=len)) # 매칭 쌍 개수가 최대인 번호판 찾기
-            
+
+
             if len(GM[best])<4:	# 최선의 번호판이 매칭 쌍 4개 미만이면 실패
                 self.label.setText('표지판이 없습니다.')  
             else:			# 성공(호모그래피 찾아 영상에 표시)

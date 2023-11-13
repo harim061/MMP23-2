@@ -40,7 +40,8 @@ class Panorama(QMainWindow) :
         self.saveButton.setEnabled(False)
         self.label.setText('c를 여러 번 눌러 수집하고 끝나면 q를 눌러 비디오를 끕니다.')
         
-        self.cap=cv.VideoCapture(0,cv.CAP_DSHOW) 
+        # self.cap=cv.VideoCapture(0,cv.CAP_DSHOW)
+        self.cap = cv.VideoCapture('garden1.mp4')
         if not self.cap.isOpened(): sys.exit('카메라 연결 실패')
         
         self.imgs=[]   
@@ -50,7 +51,7 @@ class Panorama(QMainWindow) :
             
             cv.imshow('video display', frame)
             
-            key=cv.waitKey(1) 
+            key=cv.waitKey(1)
             if key==ord('c'):            
                 self.imgs.append(frame)	# 영상 저장
             elif key==ord('q'):
