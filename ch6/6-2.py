@@ -24,7 +24,8 @@ class Video(QMainWindow):
         quitButton.clicked.connect(self.quitFunction)
        
     def videoFunction(self):
-        self.cap=cv.VideoCapture(0,cv.CAP_DSHOW)	# 카메라와 연결 시도
+        # self.cap=cv.VideoCapture(0,cv.CAP_DSHOW)	# 카메라와 연결 시도
+        self.cap = cv.VideoCapture("../ch10/slow_traffic_small.mp4")
         if not self.cap.isOpened(): self.close()
             
         while True:

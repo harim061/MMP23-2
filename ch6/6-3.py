@@ -37,6 +37,7 @@ class Orim(QMainWindow):
         saveButton.clicked.connect(self.saveFunction)
         quitButton.clicked.connect(self.quitFunction)
 
+        # 3개의 변수가 다른 곳에서 이용될 예정이므로 self 필수 !
         self.BrushSiz = 5  # 페인팅 붓의 크기
         self.LColor, self.RColor = (255, 0, 0), (0, 0, 255)  # 파란색 물체, 빨간색 배경
 
