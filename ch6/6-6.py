@@ -8,7 +8,7 @@ import sys
 # opencv-contrib-python = opencv-python + extra
 
 class SpecialEffect(QMainWindow):
-    def __init__(self):
+    def __init__(self): # 초기화면
         super().__init__()
         self.setWindowTitle('사진 특수 효과')
         self.setGeometry(200, 200, 800, 200)
@@ -18,9 +18,12 @@ class SpecialEffect(QMainWindow):
         cartoonButton = QPushButton('카툰', self)
         sketchButton = QPushButton('연필 스케치', self)
         oilButton = QPushButton('유화', self)
-        motionButton = QPushButton('모션블러', self)
+        motionButton = QPushButton('모션블러',self)
         saveButton = QPushButton('저장하기', self)
+
+        #ComboBox
         self.pickCombo = QComboBox(self)
+        #addItmes로 넣을 부분 나열 [ ] 배열 처리 index로 현재 위치 나타냄
         self.pickCombo.addItems(['엠보싱', '카툰', '연필 스케치(명암)', '연필 스케치(컬러)', '유화', '모션블러'])  # 항목 나열(각 메뉴), 배열로 인덱스, 0부터 시작
         quitButton = QPushButton('나가기', self)
         self.label = QLabel('환영합니다!', self)
@@ -84,8 +87,10 @@ class SpecialEffect(QMainWindow):
     def saveFunction(self):
         fname = QFileDialog.getSaveFileName(self, '파일 저장', './')
 
+        # 콤보박스 누가 선택 되었는지 값 리턴
         i = self.pickCombo.currentIndex()
         if i == 0:
+            # emboss -> embossFun에서 self.emboss한 값
             cv.imwrite(fname[0], self.emboss)
         elif i == 1:
             cv.imwrite(fname[0], self.cartoon)

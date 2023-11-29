@@ -13,8 +13,12 @@ kp2,des2=sift.detectAndCompute(gray2,None)
 print('특징점 개수:',len(kp1),len(kp2)) 
 
 start=time.time()
-flann_matcher=cv.DescriptorMatcher_create(cv.DescriptorMatcher_FLANNBASED)
-knn_match=flann_matcher.knnMatch(des1,des2,2)
+# flann_matcher=cv.DescriptorMatcher_create(cv.DescriptorMatcher_FLANNBASED)
+# knn_match=flann_matcher.knnMatch(des1,des2,2)
+
+# 전수조사
+bf_matcher =cv.BFMatcher()
+knn_match = bf_matcher.knnMatch(des1,des2,2)
 
 T=0.7
 good_match=[]
@@ -22,9 +26,16 @@ for nearest1,nearest2 in knn_match:
     if (nearest1.distance/nearest2.distance)<T:
         good_match.append(nearest1)
 print('매칭에 걸린 시간:',time.time()-start) 
+print(len(good_match))
+
+# 왼쪽의 50번째 인덱스 / 오른쪽의 2199번째 인덱스가 매칭됨
+print(good_match[0].queryIdx,'--',good_match[0].trainIdx,' : ',good_match[0].distance)
 
 img_match=np.empty((max(img1.shape[0],img2.shape[0]),img1.shape[1]+img2.shape[1],3),dtype=np.uint8)
-cv.drawMatches(img1,kp1,img2,kp2,good_match,img_match,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+# cv.drawMatches(img1,kp1,img2,kp2,good_match,img_match,flags=cv.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+
+# 매칭이 안되더라도 모든 키포인트 보여줌 DEFAULT
+cv.drawMatches(img1,kp1,img2,kp2,good_match,img_match,flags=cv.DRAW_MATCHES_FLAGS_DEFAULT)
 
 cv.imshow('Good Matches', img_match)
 

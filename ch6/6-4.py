@@ -37,9 +37,11 @@ class TrafficWeak(QMainWindow):
         # 3개의 파일을 읽기
         for fname,_ in self.signFiles:
             self.signImgs.append(cv.imread(fname))
+            #제일 마지막에 있는 이미지 [-1]
             cv.imshow(fname,self.signImgs[-1])        
 
 
+    # sign을 찾을 img
     def roadFunction(self):
         if self.signImgs==[]: 
             self.label.setText('먼저 번호판을 등록하세요.')
@@ -70,6 +72,9 @@ class TrafficWeak(QMainWindow):
                 
             matcher=cv.DescriptorMatcher_create(cv.DescriptorMatcher_FLANNBASED)
             GM=[]			# 여러 표지판 영상의 good match를 저장
+
+
+            # sign-des가 3개라서 반복
             for sign_kp,sign_des in KD:
                 knn_match=matcher.knnMatch(sign_des,road_des,2)
                 T=0.7
@@ -78,7 +83,8 @@ class TrafficWeak(QMainWindow):
                 for nearest1,nearest2 in knn_match:
                     if (nearest1.distance/nearest2.distance)<T:
                         good_match.append(nearest1)
-                GM.append(good_match)        
+                GM.append(good_match)
+                print(len(good_match))
             
             best=GM.index(max(GM,key=len)) # 매칭 쌍 개수가 최대인 번호판 찾기
 

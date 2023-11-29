@@ -24,6 +24,7 @@ class Panorama(QMainWindow) :
         quitButton.setGeometry(450,25,100,30) 
         self.label.setGeometry(10,70,600,170)
 
+        # setEnabled
         self.showButton.setEnabled(False) 
         self.stitchButton.setEnabled(False) 
         self.saveButton.setEnabled(False)
