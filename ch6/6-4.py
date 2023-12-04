@@ -94,8 +94,11 @@ class TrafficWeak(QMainWindow):
             else:			# 성공(호모그래피 찾아 영상에 표시)
                 sign_kp=KD[best][0]
                 good_match=GM[best]
-            
+
+            # sign
                 points1=np.float32([sign_kp[gm.queryIdx].pt for gm in good_match])
+
+            # load
                 points2=np.float32([road_kp[gm.trainIdx].pt for gm in good_match])
                 
                 H,_=cv.findHomography(points1,points2,cv.RANSAC)
