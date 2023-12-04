@@ -42,14 +42,19 @@ def create_app():
             style = request.form.get('style')
 
             if style == "Embossing":
+                # 처리된 결과를 받음
                 output = embossing(img)
 
-                # Write the result to ./result_images
+                # Write the result to ./result_images : 적당한 이름으로 저장
                 result_fname = os.path.splitext(file_name)[0] + "_emboss.jpg"
                 result_path = os.path.join(basepath, 'result_images', secure_filename(result_fname))
                 fname = os.path.basename(result_path)
+
+                # 서버에 저장
                 cv.imwrite(result_path, output)
+                # 템플릿에 저장 : 서버에게 직접 요청해서 이미지 불러옴
                 return render_template('img_result.html', file_name=file_name, result_file=fname)
+
             elif style == "Cartoon":
                 output = cartoon(img)
 
@@ -59,6 +64,7 @@ def create_app():
                 fname = os.path.basename(result_path)
                 cv.imwrite(result_path, output)
                 return render_template('img_result.html', file_name=file_name, result_file=fname)
+
             elif style == "PencilGray":
                 output = pencilGray(img)
 
@@ -68,6 +74,7 @@ def create_app():
                 fname = os.path.basename(result_path)
                 cv.imwrite(result_path, output)
                 return render_template('img_result.html', file_name=file_name, result_file=fname)
+
             elif style == "PencilColor":
                 output = pencilColor(img)
 
@@ -77,6 +84,7 @@ def create_app():
                 fname = os.path.basename(result_path)
                 cv.imwrite(result_path, output)
                 return render_template('img_result.html', file_name=file_name, result_file=fname)
+
             elif style == "OilPainting":
                 output = oilPainting(img)
 
@@ -86,7 +94,8 @@ def create_app():
                 fname = os.path.basename(result_path)
                 cv.imwrite(result_path, output)
                 return render_template('img_result.html', file_name=file_name, result_file=fname)
-            elif style == "Detail":
+
+            elif style == "DetailEnhance":
                 output = detailEnhance(img)
 
                 # /result_images에 저장
