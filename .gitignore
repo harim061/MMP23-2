@@ -51,6 +51,7 @@ MANIFEST
 pip-log.txt
 pip-delete-this-directory.txt
 
+.h5
 # Unit test / coverage reports
 htmlcov/
 .tox/
@@ -203,3 +204,6 @@ ch9/yolov3.weights
 ch9/mask_rcnn_coco.h5
 ch8/cnn_for_stanford_dogs.h5
 ch9/xception_pascalvoc.pb
+
+pybo/data/yolov3.cfg
+pybo/data/yolov3.weights

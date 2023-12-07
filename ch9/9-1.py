@@ -28,6 +28,7 @@ def yolo_detect(img,yolo_model,out_layers):
     
     box,conf,id=[],[],[]		# 박스, 신뢰도, 부류 번호
     for output in output3:
+        print(len(output))
         # 14x14 / 56x56 에 해당하는 블록의 크기 만큼
         for vec85 in output:
             scores=vec85[5:]

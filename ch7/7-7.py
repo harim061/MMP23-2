@@ -4,7 +4,8 @@ import cv2 as cv
 import matplotlib.pyplot as plt
 import winsound
 
-model=tf.keras.models.load_model('dmlp_trained.h5')
+# 모델 불러오기
+model=tf.keras.models.load_model('dmlp_trained2.h5')
 
 def reset():
     global img
@@ -33,9 +34,17 @@ def show():
     plt.show()
     
 def recognition():
+    # 1) 데이터 준비
     numerals=grab_numerals()
-    numerals=numerals.reshape(5,784)
-    numerals=numerals.astype(np.float32)/255.0
+    # 모델의 입력에 맞춰 784로 설정
+    numerals=numerals.reshape(5,784) # 1차원으로
+    numerals=numerals.astype(np.float32)/255.0 # 0~1 정규화
+
+    # 2) 모델 & 3) 학습
+
+    # 4) 예측
+    # 인식률 = evalueate(x,y) -> 문제랑 정답을 줘서 문제하고 답하고 맞는지 채점까지 완료
+    # y = predict -> 문제에 대한 답을 출력
     res=model.predict(numerals) # 신경망 모델로 예측
     class_id=np.argmax(res,axis=1)
     for i in range(5):

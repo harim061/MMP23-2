@@ -1,5 +1,5 @@
 import tensorflow as tf
-import tensorflow.keras.datasets as ds
+import keras.datasets as ds
 import matplotlib.pyplot as plt
 
 (x_train,y_train),(x_test,y_test)=ds.mnist.load_data()
