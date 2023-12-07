@@ -1,7 +1,8 @@
 import cv2 as cv 
 import numpy as np
-from tensorflow.keras.applications.resnet50 import ResNet50,preprocess_input,decode_predictions
+from keras.applications.resnet50 import ResNet50,preprocess_input,decode_predictions
 
+# imagenet으로 학습된 모델을 불러오겠다!
 model=ResNet50(weights='imagenet')
 
 img=cv.imread('rabbit.jpg') 

@@ -204,6 +204,8 @@ ch9/yolov3.weights
 ch9/mask_rcnn_coco.h5
 ch8/cnn_for_stanford_dogs.h5
 ch9/xception_pascalvoc.pb
+ch8/cnn_v2.h5
+
 
 pybo/data/yolov3.cfg
 pybo/data/yolov3.weights
