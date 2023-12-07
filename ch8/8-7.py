@@ -5,23 +5,30 @@ from tensorflow.keras.applications.densenet import DenseNet121
 from tensorflow.keras.utils import image_dataset_from_directory
 import pathlib
 
+# 1) 데이터 수집
 data_path=pathlib.Path('datasets/stanford_dogs/images/images')
 
+# 20580개의 이미지 : 16464개의 학습데이터, 4116개의 테스트 데이터
 train_ds=image_dataset_from_directory(data_path,validation_split=0.2,subset='training',seed=123,image_size=(224,224),batch_size=16)
 test_ds=image_dataset_from_directory(data_path,validation_split=0.2,subset='validation',seed=123,image_size=(224,224),batch_size=16)
 
+# 2) 모델 선택
+# 사전학습 되어있는 imagenet
 base_model=DenseNet121(weights='imagenet',include_top=False,input_shape=(224,224,3))
 cnn=Sequential()
-cnn.add(Rescaling(1.0/255.0))
-cnn.add(base_model)
-cnn.add(Flatten())
-cnn.add(Dense(1024,activation='relu'))
+cnn.add(Rescaling(1.0/255.0)) # 정규화
+cnn.add(base_model) # 사전학습모델 : 특징 추출
+cnn.add(Flatten()) # 2 -> 1차원
+cnn.add(Dense(1024,activation='relu')) # 분류
 cnn.add(Dropout(0.75))
 cnn.add(Dense(units=120,activation='softmax'))
 
+# 3) 학습
+# sparse_categorical_crossentropy > output 정수 형태
 cnn.compile(loss='sparse_categorical_crossentropy',optimizer=Adam(learning_rate=0.000001),metrics=['accuracy'])
 hist=cnn.fit(train_ds,epochs=200,validation_data=test_ds,verbose=2)
 
+# 4) 예측
 print('정확률=',cnn.evaluate(test_ds,verbose=0)[1]*100)
 
 cnn.save('cnn_for_stanford_dogs.h5')	# 미세 조정된 모델을 파일에 저장
