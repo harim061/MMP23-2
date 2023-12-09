@@ -114,13 +114,6 @@ def create_app():
     def img_processing():
         return render_template('img_processing.html')
 
-    @app.route('/stop')
-    def stop():
-        if cap.isOpened():
-            cap.release()  # 카메라와 연결을 끊음
-        cv.destroyAllWindows()
-        return render_template('index.html')
-
 
     def construct_yolo_v3():
 
@@ -193,14 +186,22 @@ def create_app():
             yield(b'--frame\r\n'
                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-
-    @app.route('/video_yolo')
-    def video_yolo():
-        return Response(capture_yolo(), mimetypes='multipart/x-mixed-replace; boundary=frame')
-
+    # YOLO 띄우기
     @app.route('/webcam_yolo/')
     def webcam_yolo():
         return render_template('webcam_yolo.html')
+
+    @app.route('/video_yolo')
+    def video_yolo():
+        # 이미지를 리턴 Response
+        return Response(capture_yolo(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+    @app.route('/stop')
+    def stop():
+        if cap.isOpened():
+            cap.release()  # 카메라와 연결을 끊음
+        return render_template('index.html')
 
 
     @app.route('/')

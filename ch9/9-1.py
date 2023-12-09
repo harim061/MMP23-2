@@ -1,6 +1,7 @@
 import numpy as np
 import cv2 as cv
 import sys
+# 한글 출력을 위한
 from PIL import ImageFont,ImageDraw,  Image
 
 # 욜로를 가져옴
@@ -12,7 +13,7 @@ def construct_yolo_v3():
     model=cv.dnn.readNet('yolov3.weights','yolov3.cfg')
     layer_names=model.getLayerNames()
     print(layer_names)
-    # out_layer 욜로의 결과를 출력하는 층
+    # out_layer 욜로의 결과를 출력하는 층 / 3개 존재
     out_layers=[layer_names[i-1] for i in model.getUnconnectedOutLayers()]
     print(out_layers)
     
@@ -21,6 +22,7 @@ def construct_yolo_v3():
 # 욜로를 이용함
 def yolo_detect(img,yolo_model,out_layers):
     height,width=img.shape[0],img.shape[1]
+    # 정규화, resize
     test_img=cv.dnn.blobFromImage(img,1.0/256,(448,448),(0,0,0),swapRB=True)
     
     yolo_model.setInput(test_img)
@@ -35,6 +37,7 @@ def yolo_detect(img,yolo_model,out_layers):
             class_id=np.argmax(scores)
             confidence=scores[class_id]
             if confidence>0.5:	# 신뢰도가 50% 이상인 경우만 취함
+                print(vec85)
                 centerx,centery=int(vec85[0]*width),int(vec85[1]*height)
                 w,h=int(vec85[2]*width),int(vec85[3]*height)
                 x,y=int(centerx-w/2),int(centery-h/2)
