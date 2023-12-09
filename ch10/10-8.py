@@ -24,7 +24,7 @@ while True:
         for landmarks in res.multi_hand_landmarks:
             mp_drawing.draw_landmarks(frame,landmarks,mp_hand.HAND_CONNECTIONS,mp_styles.get_default_hand_landmarks_style(),mp_styles.get_default_hand_connections_style())
 
-    cv.imshow('MediaPipe Hands',cv.flip(frame,1))	# 좌우반전
+    cv.imshow('MediaPipe Hands',cv.flip(frame,1))	# 1:좌우반전 0:상하반전 -1:좌우&상하 = 원점대칭
     if cv.waitKey(5)==ord('q'):
       break
 
