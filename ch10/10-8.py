@@ -5,6 +5,9 @@ mp_hand=mp.solutions.hands
 mp_drawing=mp.solutions.drawing_utils
 mp_styles=mp.solutions.drawing_styles
 
+# max_num = 손 몇개
+# true -> static
+# false -> 처음 한 번만 손 검출
 hand=mp_hand.Hands(max_num_hands=2,static_image_mode=False,min_detection_confidence=0.5,min_tracking_confidence=0.5)
 
 cap=cv.VideoCapture(0,cv.CAP_DSHOW)
